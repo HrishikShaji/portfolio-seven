@@ -6,6 +6,8 @@ import { About } from "./components/About";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import { Projects } from "./components/Projects";
+import { Contact } from "./components/Contact";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -15,6 +17,8 @@ export default function Home() {
       <Hero />
       <About />
       <Skills />
+      <Projects />
+      <Contact />
     </main>
   );
 }
