@@ -9,18 +9,20 @@ import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import { Projects } from "./components/Projects";
 import { Contact } from "./components/Contact";
 import { Testimonials } from "./components/Testimonials";
+import { Features } from "./components/Features";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Home() {
-	return (
-		<main>
-			<Hero />
-			<About />
-			<Skills />
-			<Projects />
-			<Testimonials />
-			<Contact />
-		</main>
-	);
+  return (
+    <main>
+      <Hero />
+      <About />
+      <Skills />
+      <Features />
+      <Projects />
+      <Testimonials />
+      <Contact />
+    </main>
+  );
 }
