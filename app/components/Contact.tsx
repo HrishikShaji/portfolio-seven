@@ -1,29 +1,83 @@
-
+"use client";
+import { useGSAP } from "@gsap/react";
 import { data } from "../lib/data";
+import { useRef } from "react";
+import gsap from "gsap";
 
 export const Contact = () => {
+	const contactRef = useRef<HTMLDivElement>(null);
+	const targetRef = useRef<HTMLDivElement>(null);
+
+	useGSAP(() => {
+		if (contactRef.current && targetRef.current) {
+			gsap.to(targetRef.current, {
+				scrollTrigger: {
+					trigger: contactRef.current,
+					pin: targetRef.current,
+					start: "top 20%",
+					end: "bottom 80%",
+					scrub: true,
+				},
+			});
+		}
+	}, {});
 	return (
-		<div className="h-screen w-full bg-teal-300 text-black flex justify-center items-center">
-			<div className="h-[60vh] w-[60vw] flex">
-				<div className="flex-1 bg-purple-500 h-full">
-					<h1 className="text-6xl text-white">PROJECTS</h1>
+		<div className="  text-black py-40  flex justify-center w-full items-center ">
+			<div className="flex w-[60vw]">
+				<div ref={targetRef} className="w-[50%] h-full ">
+					<h1 className="text-6xl text-black">Contact</h1>
 				</div>
-				<div className="flex-1 bg-pink-500 h-full">
+				<div ref={contactRef} className="w-[50%] h-full flex gap-10 flex-col">
+					<p className="text-3xl">{`
+						Ready to bring your web project to life? Whether you're a small
+						business owner, startup founder, or creative entrepreneur, I'm here
+						to collaborate and turn your vision into a stunning reality. Feel
+						free to reach out to discuss your project, ask questions, or just
+						say hello. I'm available for freelance web development work and
+						would love to hear from you. Let's make something amazing together.
+					`}</p>
 					<form className="flex flex-col gap-2">
 						<div className="flex flex-col gap-1">
-							<label>Name</label>
-							<input className="p-1 rounded-md" />
+							<label className="text-2xl">NAME</label>
+							<input />
 						</div>
 						<div className="flex flex-col gap-1">
-							<label>Email</label>
-							<input className="p-1 rounded-md" />
+							<label className="text-2xl">EMAIL</label>
+							<input />
 						</div>
 						<div className="flex flex-col gap-1">
-							<label>Message</label>
-							<textarea className="p-1 rounded-md" />
+							<label className="text-2xl">MESSAGE</label>
+							<textarea />
 						</div>
 						<button>SEND</button>
 					</form>
+					<div>
+						<h1>{`Email: YourEmail@example.com`}</h1>
+						<h1>
+							{`
+
+Phone: +1 (XXX) XXX-XXXX
+`}
+						</h1>
+						<h1>
+							{` 
+
+						Location: [Your City, Your Country]
+`}
+						</h1>
+						<h1>
+							{`
+
+
+LinkedIn: Your LinkedIn Profile
+							`}
+						</h1>
+
+						<h1>{`
+
+GitHub: Your GitHub Profile
+						`}</h1>
+					</div>
 				</div>
 			</div>
 		</div>
