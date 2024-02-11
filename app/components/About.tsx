@@ -8,7 +8,6 @@ import SplitType from "split-type";
 export const About = () => {
   const paraRef = useRef<HTMLParagraphElement>(null);
   const targetRef = useRef<HTMLDivElement>(null);
-  const wordRef = useRef<HTMLSpanElement>(null);
 
   useGSAP(() => {
     if (paraRef.current && targetRef.current) {
@@ -24,29 +23,27 @@ export const About = () => {
     }
     if (paraRef.current) {
       const text = new SplitType(paraRef.current, { types: "lines" });
-      const words = gsap.utils.toArray(".word");
-      const tl = gsap.timeline({ defaults: { opacity: 0.2 } });
-      tl.from(words, {
-        opacity: 0.2,
-      });
-      if (text.lines) {
-        text.lines.forEach((target) => {
-          gsap.from(target, {
-            opacity: 0.2,
+
+      text.lines?.forEach((line) => {
+        const words = new SplitType(line, { types: "chars" });
+
+        if (words.chars) {
+          gsap.to(words.chars, {
+            color: "black",
+            stagger: 0.025,
+            ease: "none",
             scrollTrigger: {
-              trigger: target,
+              trigger: words.chars,
               markers: true,
               scrub: 1,
               start: "top center",
-              end: "bottom center",
+              end: "+=2px",
             },
           });
-        });
-      }
+        }
+      });
     }
   }, {});
-
-  const newPara = data.about.description.split(" ");
 
   return (
     <div className="  text-black py-40  flex justify-center w-full items-center ">
@@ -55,7 +52,7 @@ export const About = () => {
           <h1 className="text-6xl text-black">ABOUT</h1>
         </div>
         <div className="w-[50%] h-full ">
-          <p ref={paraRef} className="text-3xl  flex flex-wrap">
+          <p ref={paraRef} className="text-3xl leading-[50px] text-neutral-300">
             {data.about.description}
           </p>
         </div>
