@@ -1,15 +1,37 @@
+"use client";
+import { useGSAP } from "@gsap/react";
 import { data } from "../lib/data";
+import { useRef } from "react";
+import gsap from "gsap";
 
 export const Skills = () => {
+  const skillsRef = useRef<HTMLDivElement>(null);
+  const targetRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (skillsRef.current && targetRef.current) {
+      gsap.to(targetRef.current, {
+        scrollTrigger: {
+          trigger: skillsRef.current,
+          pin: targetRef.current,
+          start: "top 20%",
+          end: "bottom 80%",
+          scrub: true,
+        },
+      });
+    }
+  }, {});
   return (
-    <div className="h-screen w-full bg-teal-300 text-black flex justify-center items-center">
-      <div className="h-[60vh] w-[60vw] flex">
-        <div className="flex-1 bg-purple-500 h-full">
-          <h1 className="text-6xl text-white">SKILLS</h1>
+    <div className="  text-black py-40  flex justify-center w-full items-center ">
+      <div className="flex w-[60vw]">
+        <div ref={targetRef} className="w-[50%] h-full ">
+          <h1 className="text-6xl text-black">Skills</h1>
         </div>
-        <div className="flex-1 bg-pink-500 h-full">
+        <div ref={skillsRef} className="w-[50%] h-full flex flex-col">
           {data.skills.data.map((item, i) => (
-            <h1 key={i}>{item}</h1>
+            <div className="py-5" key={i}>
+              <h1 className="text-3xl">{item}</h1>
+            </div>
           ))}
         </div>
       </div>
