@@ -49,18 +49,8 @@ interface TestimonialProps {
 
 const Testimonial: React.FC<TestimonialProps> = ({ item }) => {
 	const circleRef = useRef<HTMLImageElement>(null);
-	const itemRef = useRef<HTMLDivElement>(null);
-	const titleRef = useRef<HTMLHeadingElement>(null);
 	useGSAP(() => {
-		if (titleRef.current && circleRef.current && itemRef.current) {
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: itemRef.current,
-					start: "top 35%",
-					end: "top 5%",
-					scrub: true,
-				},
-			});
+		if (circleRef.current) {
 
 			const circleTl = gsap.timeline({
 				scrollTrigger: {
@@ -69,20 +59,6 @@ const Testimonial: React.FC<TestimonialProps> = ({ item }) => {
 					end: "top 5%",
 					scrub: true,
 				},
-			});
-
-			tl.fromTo(
-				titleRef.current,
-
-				{
-					scale: 1,
-				},
-				{
-					transformOrigin: "left",
-					scale: 2,
-				},
-			).to(titleRef.current, {
-				scale: 1,
 			});
 
 			circleTl
@@ -103,11 +79,10 @@ const Testimonial: React.FC<TestimonialProps> = ({ item }) => {
 	}, {});
 	return (
 		<div
-			ref={itemRef}
 			className=" flex relative justify-between items-start gap-2"
 		>
 			<div className=" flex flex-col gap-10">
-				<h3 className="text-3xl" ref={titleRef}>
+				<h3 className="text-3xl" >
 					{item.name}
 				</h3>
 				<h1>{item.desc}</h1>
