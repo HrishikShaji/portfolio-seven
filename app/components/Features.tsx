@@ -11,12 +11,14 @@ export const Features = () => {
 
   useGSAP(() => {
     if (featuresRef.current && targetRef.current) {
+      const height = featuresRef.current.getBoundingClientRect().height;
+      const headingHeight = targetRef.current.getBoundingClientRect().height;
       gsap.to(targetRef.current, {
         scrollTrigger: {
           trigger: featuresRef.current,
           pin: targetRef.current,
           start: "top 20%",
-          end: "bottom 80%",
+          end: `+=${height - headingHeight}`,
           scrub: true,
         },
       });
@@ -28,7 +30,7 @@ export const Features = () => {
         <div ref={targetRef} className="w-[50%] h-full ">
           <h1 className="text-6xl text-black">Features</h1>
         </div>
-        <div ref={featuresRef} className="w-[50%] h-full flex flex-col">
+        <div ref={featuresRef} className="w-[50%] h-full gap-20 flex flex-col">
           {data.features.data.map((item, i) => (
             <Feature key={i} item={item} />
           ))}
@@ -75,6 +77,7 @@ const Feature: React.FC<FeatureProps> = ({ item }) => {
         {
           transformOrigin: "left",
           scale: 2,
+          ease: "sine",
         },
       ).to(titleRef.current, {
         scale: 1,
@@ -99,9 +102,9 @@ const Feature: React.FC<FeatureProps> = ({ item }) => {
   return (
     <div
       ref={itemRef}
-      className="py-5 flex relative justify-between items-start gap-2"
+      className=" flex relative justify-between items-start gap-2"
     >
-      <div className="py-5 flex flex-col gap-10">
+      <div className="flex flex-col gap-10">
         <h1 className="text-3xl max-w-[60%]" ref={titleRef}>
           {item.title}
         </h1>
