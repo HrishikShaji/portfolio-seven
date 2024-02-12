@@ -3,7 +3,6 @@ import { useGSAP } from "@gsap/react";
 import { data } from "../lib/data";
 import { useRef } from "react";
 import gsap from "gsap";
-import Image from "next/image";
 
 export const Education = () => {
 	const educationRef = useRef<HTMLDivElement>(null);
@@ -25,10 +24,10 @@ export const Education = () => {
 		}
 	}, {});
 	return (
-		<div className="  text-black py-40  flex justify-center w-full items-center ">
-			<div className="flex w-[60vw]">
+		<div className="relative   py-40  flex justify-center w-full bg-white text-black  items-center ">
+			<div className="flex w-[90vw]  ">
 				<div ref={targetRef} className="w-[50%] h-full ">
-					<h1 className="text-6xl text-black">Education</h1>
+					<h2 className="text-8xl ">Education</h2>
 				</div>
 				<div ref={educationRef} className="w-[50%] h-full gap-20 flex flex-col">
 					{data.education.data.map((item, i) => (
@@ -49,15 +48,8 @@ const Item: React.FC<ItemProps> = ({ item }) => {
 	const itemRef = useRef<HTMLDivElement>(null);
 	const titleRef = useRef<HTMLHeadingElement>(null);
 	useGSAP(() => {
-		if (titleRef.current && circleRef.current && itemRef.current) {
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: itemRef.current,
-					start: "top 35%",
-					end: "top 5%",
-					scrub: true,
-				},
-			});
+		if (titleRef.current && itemRef.current) {
+			const tl = gsap.timeline();
 
 			const circleTl = gsap.timeline({
 				scrollTrigger: {
@@ -68,19 +60,33 @@ const Item: React.FC<ItemProps> = ({ item }) => {
 				},
 			});
 
-			tl.fromTo(
+			gsap.fromTo(
 				titleRef.current,
 
 				{
 					scale: 1,
 				},
 				{
-					transformOrigin: "left",
 					scale: 2,
-					ease: "sine",
+					transformOrigin: "left",
+					scrollTrigger: {
+						trigger: itemRef.current,
+						start: "top 35%",
+						end: "top 20%",
+						scrub: true,
+					},
 				},
-			).to(titleRef.current, {
+			);
+			gsap.to(titleRef.current, {
+				immediateRender: false,
 				scale: 1,
+				transformOrigin: "left",
+				scrollTrigger: {
+					trigger: itemRef.current,
+					start: "top 15%",
+					end: "top 5%",
+					scrub: true,
+				},
 			});
 
 			circleTl
@@ -102,17 +108,19 @@ const Item: React.FC<ItemProps> = ({ item }) => {
 	return (
 		<div
 			ref={itemRef}
-			className=" flex relative justify-between items-start gap-2"
+			className=" flex relative justify-between  items-start gap-2"
 		>
-			<div className="flex flex-col gap-10">
-				<h1 className="text-3xl max-w-[60%]" ref={titleRef}>
+			<div className="flex flex-col gap-10 ">
+				<h3 className="text-3xl max-w-[60%]" ref={titleRef}>
 					{item.major}
-				</h1>
-				<h1>{item.degreeType}</h1>
-				<h1>{item.university}</h1>
-				<p>{item.description}</p>
+				</h3>
+				<div className="flex flex-col gap-2">
+					<h1 className="text-2xl">{item.degreeType}</h1>
+					<h1 className="text-xl">{item.university}</h1>
+					<h1 className="text-gray-700">{item.description}</h1>
+				</div>
 			</div>
-			<div className="">{`${item.startYear}-${item.endYear}`}</div>
+			<h2 className="flex-shrink-0">{`${item.startYear}-${item.endYear}`}</h2>
 		</div>
 	);
 };

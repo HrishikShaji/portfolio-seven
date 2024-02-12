@@ -26,9 +26,9 @@ export const Experience = () => {
 	}, {});
 	return (
 		<div className="  text-black py-40  flex justify-center w-full items-center ">
-			<div className="flex w-[60vw]">
+			<div className="flex w-[90vw]">
 				<div ref={targetRef} className="w-[50%] h-full ">
-					<h1 className="text-6xl text-black">Education</h1>
+					<h2 className="text-8xl text-black">Experience</h2>
 				</div>
 				<div
 					ref={experienceRef}
@@ -52,7 +52,7 @@ const Item: React.FC<ItemProps> = ({ item }) => {
 	const itemRef = useRef<HTMLDivElement>(null);
 	const titleRef = useRef<HTMLHeadingElement>(null);
 	useGSAP(() => {
-		if (titleRef.current && circleRef.current && itemRef.current) {
+		if (titleRef.current && itemRef.current) {
 			const tl = gsap.timeline({
 				scrollTrigger: {
 					trigger: itemRef.current,
@@ -108,13 +108,15 @@ const Item: React.FC<ItemProps> = ({ item }) => {
 			className=" flex relative justify-between items-start gap-2"
 		>
 			<div className="flex flex-col gap-10">
-				<h1 className="text-3xl max-w-[60%]" ref={titleRef}>
+				<h3 className="text-3xl max-w-[60%]" ref={titleRef}>
 					{item.position}
-				</h1>
-				<h1>{item.company}</h1>
-				<p>{item.description}</p>
+				</h3>
+				<div className="flex flex-col gap-2">
+					<h1 className="text-2xl">{item.company}</h1>
+					<h1>{item.description}</h1>
+				</div>
 			</div>
-			<div className="">{`${item.startYear}-${item.endYear}`}</div>
+			<h2 className="">{`${item.startYear}-${item.endYear}`}</h2>
 		</div>
 	);
 };

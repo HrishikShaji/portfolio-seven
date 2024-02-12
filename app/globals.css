@@ -2,17 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-.text-reveal {
-  background: linear-gradient(
-    to right,
-    rgb(255, 255, 255) 50%,
-    rgb(37, 37, 37) 50%
-  );
-  background-size: 200% 100%;
-  background-position-x: 100%;
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  /*   margin-bottom: -250px; */
-  /*   outline: 6px dotted teal; */
+@font-face {
+  font-family: "one";
+  src: url(../fonts/Aventa-Bold.ttf);
+}
+
+@font-face {
+  font-family: "two";
+  src: url(../fonts/aquire-font/Aquire-one.otf);
+}
+@font-face {
+  font-family: "three";
+  src: url(../fonts/courages-font/Courages.otf);
+}
+
+@font-face {
+  font-family: "four";
+  src: url(../fonts/typographica-font/Typographica.ttf);
+}
+h1 {
+  font-family: "one";
+}
+h2 {
+  font-family: "two";
+}
+h3 {
+  font-family: "three";
+}
+
+h4 {
+  font-family: "four";
 }
