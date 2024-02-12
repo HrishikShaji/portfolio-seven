@@ -10,19 +10,23 @@ import { Projects } from "./components/Projects";
 import { Contact } from "./components/Contact";
 import { Testimonials } from "./components/Testimonials";
 import { Features } from "./components/Features";
+import { Education } from "./components/Education";
+import { Experience } from "./components/Experience";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Home() {
-  return (
-    <main>
-      <Hero />
-      <About />
-      <Skills />
-      <Features />
-      <Projects />
-      <Testimonials />
-      <Contact />
-    </main>
-  );
+	return (
+		<main>
+			<Hero />
+			<About />
+			<Education />
+			<Experience />
+			<Skills />
+			<Features />
+			<Projects />
+			<Testimonials />
+			<Contact />
+		</main>
+	);
 }
